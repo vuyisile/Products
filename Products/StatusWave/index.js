@@ -211,7 +211,6 @@ function tweet(message, token, tokenSecret) {
   request.post(options, function(err, httpResponse, body) {
     console.log("http response code", httpResponse.statusCode);
     console.log("http response body", httpResponse.body);
-
     if (err) {
       console.log(err);
     }

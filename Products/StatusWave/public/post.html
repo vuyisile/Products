@@ -1,13 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+        crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
     <title>Authorize twitter</title>
+    <style>
+        .sec1 {
+            background-color: blue;
+            margin: 100
+        }
+
+        .brand {
+            color: whitesmoke;
+            background-color: #0000FF;
+            text-align: center;
+        }
+
+        .container {}
+
+        .container-fluid {}
+
+        .m-message {
+            color: whitesmoke;
+            background-color: #6495ED;
+            text-align: center;
+        }
+
+        .btn-sec {
+            color: whitesmoke;
+            background-color: #5F9EA0;
+        }
+
+        .opac {
+            opacity: 6;
+            filter: alpha(opacity=50);
+        }
+
+        h3 {
+            margin-top: 5em;
+            margin-bottom: 5em
+        }
+
+        button {
+            background-color: #0000FF;
+            color: white;
+            width: 50%;
+            margin-bottom: 10em;
+        }
+
+        body {
+            background-color: #B9D3EE
+        }
+
+
+        label {
+            text-align: left
+        }
+
+        form {
+            margin: 10em
+        }
+
+        textarea {
+            width: 100%;
+            margin: 5em;
+        }
+    </style>
 
     <script>
         function post() {
+            var postMessage = document.getElementById("message").value;
             const authToken = localStorage.getItem("token");
 
             fetch("/message", {
@@ -16,10 +84,11 @@
                     "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
                     'Authorization': authToken
                 },
-                body:"message=Hello%20World"
+                body: `message=${postMessage}`
             })
                 .then(function (response) {
-                    console.log(response);
+                    console.log("message:" + response);
+                    alert("Your text has been posted");
                 })
                 .catch(function (error) {
                     console.log('Request failed', error);
@@ -27,7 +96,21 @@
         }
     </script>
 </head>
-<body onload="">
-    <button onclick="post()">Post</button>
+
+<body class="container">
+    <div class="row col-md-12">
+        <section class="brand container">
+            <h1>Status Wave</h1>
+        </section>
+    </div>
+
+    <div class=" row col-md-12 container-fluid">
+        <section class="m-message container opac">
+            <textarea class="container-fluid" name="message" id="message" cols="30" rows="10"></textarea></br>
+            <button class="btn" onclick="post()">Post</button>
+        </section>
+    </div>
+
 </body>
+
 </html>
