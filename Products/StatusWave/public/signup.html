@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign up to Status Wave</title>
+    <script>
+        function signUp(event) {
+            event.preventDefault();
+
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm_password").value;
+
+            if (password !== confirmPassword) {
+                alert("Confirm password must be the same as the password.");
+                return false;
+            }
+
+            var body = `name=${name}&email=${email}&password=${password}`;
+
+            fetch("/signup", {
+                method: 'post',
+                headers: {
+                    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+                },
+                body: body
+            })
+                .then(function (response) {
+                    if (response.status == 201) {
+                        window.location = "/login.html";
+                    }
+                    console.log('response', response);
+                })
+                .catch(function (error) {
+                    console.log('Request failed', error);
+                });
+            //event.preventDefault();
+
+        }
+    </script>
+</head>
+
+<style>
+    body {
+        background-color: darkslategray;
+        font-size: 20px;
+    }
+</style>
+
+<body>
+
+    <form onsubmit="signUp(event);">
+
+            <label>Name</label>
+            <input id="name" type="name" placeholder="Enter name" />
+            <br>
+        <br>
+        <label>Email</label>
+        <input id="email" type="email" placeholder="Enter email" />
+        <br>
+        <br>
+        <label>Password</label>
+        <input id="password" type="password" placeholder="Enter password" />
+        <br>
+        <br>
+        <label>Confirm Password</label>
+        <input id="confirm_password" type="password" placeholder="Confirm password" />
+        <br>
+        <br>
+        <input type="submit" value="Sign Up" align="left" />
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Authorize twitter</title>
+
+    <script>
+        function getToken() {
+
+            const authToken = localStorage.getItem("token");
+
+            fetch("/authorize/twitter", {
+                method: 'get',
+                headers: {
+                    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+                    'Authorization': authToken
+                },
+            })
+                .then(function (response) {
+                    if (response.status === 200){
+
+                        response.text().then((token) => {
+                            console.log(token);
+                            document.getElementById('link').innerHTML =
+                                "<a href='https://api.twitter.com/oauth/authorize?oauth_token="
+                                + token +
+                                "'>Authorize Twitter</a>";
+                        });
+
+
+                    }else {
+                        alert("Could not authorize, please login");
+                        window.location = "/login.html";
+                    }
+
+                })
+                .catch(function (error) {
+                    console.log('Request failed', error);
+                });
+            //event.preventDefault();
+
+        }
+    </script>
+</head>
+<body onload="getToken()">
+    <h1>Please authorize twitter</h1>
+    <div id="link"></div>
+</body>
+</html>

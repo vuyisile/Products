@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Authorize twitter</title>
+
+    <script>
+        function post() {
+            const authToken = localStorage.getItem("token");
+
+            fetch("/message", {
+                method: 'post',
+                headers: {
+                    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+                    'Authorization': authToken
+                },
+                body:"message=Hello%20World"
+            })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log('Request failed', error);
+                });
+        }
+    </script>
+</head>
+<body onload="">
+    <button onclick="post()">Post</button>
+</body>
+</html>
