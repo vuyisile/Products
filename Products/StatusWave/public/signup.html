@@ -5,83 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
-        crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
-        crossorigin="anonymous"></script>
     <title>Sign up to Status Wave</title>
-    <style>
-        .sec1 {
-            background-color: blue;
-            margin: 100
-        }
-
-        .brand {
-            color: whitesmoke;
-            background-color: #0000FF;
-            text-align: center;
-        }
-
-        .container {}
-
-        .container-fluid {}
-
-        .m-message {
-            color: whitesmoke;
-            background-color: #6495ED;
-            text-align: center;
-        }
-
-        .btn-sec {
-            color: whitesmoke;
-            background-color: #5F9EA0;
-        }
-
-
-
-        h3 {
-            margin-top: 5em;
-            margin-bottom: 5em
-        }
-
-        .btn-color {
-            background-color: #0000FF;
-            color: white;
-        }
-
-        body {
-            background-color: #B9D3EE
-        }
-
-        input {
-            width: 50%
-        }
-
-        label {
-            text-align: left
-        }
-
-        form {
-            margin: 10em
-        }
-    </style>
-
     <script>
         function signUp(event) {
             event.preventDefault();
-
             var name = document.getElementById("name").value;
             var email = document.getElementById("email").value;
             var password = document.getElementById("password").value;
             var confirmPassword = document.getElementById("confirm_password").value;
-
             if (password !== confirmPassword) {
                 alert("Confirm password must be the same as the password.");
                 return false;
             }
-
             var body = `name=${name}&email=${email}&password=${password}`;
-
             fetch("/signup", {
                 method: 'post',
                 headers: {
@@ -99,40 +35,39 @@
                     console.log('Request failed', error);
                 });
             //event.preventDefault();
-
         }
     </script>
 </head>
 
 <style>
-
+    body {
+        background-color: darkslategray;
+        font-size: 20px;
+    }
 </style>
 
-<body class="container">
-    <div class="row col-md-12">
-        <section class="brand container">
-            <h1>Status Wave</h1>
-        </section>
-    </div>
+<body>
 
-    <div class=" row col-md-12 container-fluid">
-        <section class="m-message container opac">
-            <form class="container-fluid" onsubmit="signUp(event);">
-                <input type="text" placeholder="Name" /></br>
-                </br>
-                <input type="email" placeholder="Email Address" /></br>
-                </br>
-                <input type="password" placeholder="Password" /></br>
-                </br>
+    <form onsubmit="signUp(event);">
 
-                <input type="password" placeholder="Confirm Password" /></br>
-                </br>
-                <input class="btn btn-color" type="button" value="submit" /></br>
-                </br>
-            </form>
-        </section>
-    </div>
-
+            <label>Name</label>
+            <input id="name" type="name" placeholder="Enter name" />
+            <br>
+        <br>
+        <label>Email</label>
+        <input id="email" type="email" placeholder="Enter email" />
+        <br>
+        <br>
+        <label>Password</label>
+        <input id="password" type="password" placeholder="Enter password" />
+        <br>
+        <br>
+        <label>Confirm Password</label>
+        <input id="confirm_password" type="password" placeholder="Confirm password" />
+        <br>
+        <br>
+        <input type="submit" value="Sign Up" align="left" />
+    </form>
 </body>
 
 </html>
